@@ -1,0 +1,39 @@
+{% extends "admin_base.html" %}
+
+{% block admin_content %}
+
+<h4 class="mb-4">Assign Subject to Student</h4>
+
+<form method="POST">
+
+  <div class="mb-3">
+    <label class="form-label">Select Student</label>
+    <select name="student_id" class="form-select" required>
+      <option value="">-- Choose Student --</option>
+      {% for student in students %}
+        <option value="{{ student.id }}">
+          {{ student.name }} ({{ student.reg_no }})
+        </option>
+      {% endfor %}
+    </select>
+  </div>
+
+  <div class="mb-3">
+    <label class="form-label">Select Subject</label>
+    <select name="subject_id" class="form-select" required>
+      <option value="">-- Choose Subject --</option>
+      {% for subject in subjects %}
+        <option value="{{ subject.id }}">
+          {{ subject.name }}
+        </option>
+      {% endfor %}
+    </select>
+  </div>
+
+  <button type="submit" class="btn btn-primary">
+    Assign Subject
+  </button>
+
+</form>
+
+{% endblock %}

@@ -1,0 +1,76 @@
+{% extends "admin_base.html" %}
+
+{% block admin_content %}
+
+<h2 class="mb-4">Add Subject 📘</h2>
+
+<form method="POST" class="mb-5">
+
+  <div class="mb-3">
+    <label class="form-label">Subject Name</label>
+    <input
+      type="text"
+      name="name"
+      class="form-control"
+      placeholder="e.g., Data Structures"
+      required
+    >
+  </div>
+
+  <div class="mb-3">
+    <label class="form-label">
+      Expected Total Classes (This Semester)
+    </label>
+    <input
+      type="number"
+      name="expected_total_classes"
+      class="form-control"
+      placeholder="e.g., 45"
+      required
+    >
+    <div class="form-text">
+      Total number of classes planned for this subject.
+    </div>
+  </div>
+
+  <button type="submit" class="btn btn-success">
+    Add Subject
+  </button>
+
+</form>
+
+<hr>
+
+<h4 class="mt-4">Existing Subjects</h4>
+
+<table class="table table-striped mt-3">
+  <thead>
+    <tr>
+      <th>Subject</th>
+      <th>Classes Conducted</th>
+      <th>Expected Total</th>
+      <th>Action</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    {% for sub in subjects %}
+    <tr>
+      <td>{{ sub.name }}</td>
+      <td>{{ sub.total_classes }}</td>
+      <td>{{ sub.expected_total_classes }}</td>
+      <td>
+        <a
+          href="{{ url_for('delete_subject', id=sub.id) }}"
+          class="btn btn-sm btn-danger"
+          onclick="return confirm('Delete this subject?')"
+        >
+          Delete
+        </a>
+      </td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+
+{% endblock %}

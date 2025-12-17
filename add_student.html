@@ -1,0 +1,10 @@
+{% extends "admin_base.html" %}
+{% block admin_content %}
+<h4>Add Student</h4>
+<form method="POST" enctype="multipart/form-data">
+  <div class="mb-3"><input name="reg_no" class="form-control" placeholder="Registration No" required></div>
+  <div class="mb-3"><input name="name" class="form-control" placeholder="Full name" required></div>
+  <div class="mb-3"><input name="photo" type="file" class="form-control"></div>
+  <button class="btn btn-success">Save Student</button>
+</form>
+{% endblock %}

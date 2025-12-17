@@ -1,0 +1,60 @@
+{% extends "admin_base.html" %}
+
+{% block admin_content %}
+
+<h4 class="mb-4">Mark Attendance</h4>
+
+<form method="POST">
+
+  <div class="mb-3">
+    <label class="form-label">Select Student & Subject</label>
+    <select name="enrollment_id" class="form-select" required>
+      <option value="">-- Select --</option>
+      {% for e in enrollments %}
+        <option value="{{ e.id }}">
+          {{ e.student.name }} ({{ e.student.reg_no }}) – {{ e.subject.name }}
+        </option>
+      {% endfor %}
+    </select>
+  </div>
+
+  <div class="mb-3">
+    <label class="form-label">Class Date</label>
+    <input type="date" name="class_date" class="form-control" required>
+  </div>
+
+  <div class="mb-3">
+  <label class="form-label">Class Start Time</label>
+  <input type="time" name="start_time" class="form-control">
+</div>
+
+<div class="mb-3">
+  <label class="form-label">Class End Time</label>
+  <input type="time" name="end_time" class="form-control">
+</div>
+
+
+  <div class="mb-3">
+    <label class="form-label">Attendance Status</label><br>
+
+    <div class="form-check form-check-inline">
+      <input class="form-check-input" type="radio"
+             name="status" value="present" required>
+      <label class="form-check-label">Present</label>
+    </div>
+
+    <div class="form-check form-check-inline">
+      <input class="form-check-input" type="radio"
+             name="status" value="absent" required>
+      <label class="form-check-label">Absent</label>
+    </div>
+  </div>
+
+  <button type="submit" class="btn btn-success">
+    Submit Attendance
+  </button>
+
+</form>
+
+{% endblock %}
+

@@ -1,0 +1,44 @@
+{% extends "admin_base.html" %}
+
+{% block admin_content %}
+
+<h3 class="mb-3">Attendance Report</h3>
+
+<p>
+  <strong>Name:</strong> {{ student.name }} <br>
+  <strong>Registration No:</strong> {{ student.reg_no }}
+</p>
+
+<table class="table table-bordered table-striped bg-white mt-3">
+  <thead class="table-dark">
+    <tr>
+      <th>Subject</th>
+      <th>Classes Attended</th>
+      <th>Total Classes</th>
+      <th>Attendance %</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    {% for row in attendance %}
+    <tr>
+      <td>{{ row.subject }}</td>
+      <td>{{ row.attended }}</td>
+      <td>{{ row.total }}</td>
+      <td>
+        {% if row.total > 0 %}
+          <strong>{{ row.percent }}%</strong>
+        {% else %}
+          <span class="text-muted">0%</span>
+        {% endif %}
+      </td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+
+<a href="{{ url_for('admin_students') }}" class="btn btn-secondary mt-3">
+  ← Back
+</a>
+
+{% endblock %}

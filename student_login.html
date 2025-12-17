@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="d-flex justify-content-center align-items-center" style="min-height: 75vh;">
+  <div class="card shadow-sm p-4" style="width: 420px; max-width: 100%;">
+    <div class="d-flex justify-content-between align-items-center mb-3">
+      <h4 class="mb-0">Student Login</h4>
+      <a href="{{ url_for('home') }}" class="btn btn-sm btn-outline-secondary">Back</a>
+    </div>
+
+    <p class="text-muted small mb-4">
+      Enter your registration number.
+    </p>
+
+    <form method="POST" action="{{ url_for('student_login') }}">
+      <div class="mb-3">
+        <label class="form-label">Registration Number</label>
+        <input
+          class="form-control"
+          name="reg_no"
+          placeholder="e.g. 23"
+          autocomplete="off"
+          required
+        >
+      </div>
+
+      <button class="btn btn-primary w-100">Enter</button>
+    </form>
+  </div>
+</div>
+{% endblock %}
+

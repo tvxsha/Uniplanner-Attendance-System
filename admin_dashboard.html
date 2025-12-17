@@ -1,0 +1,22 @@
+{% extends "admin_base.html" %}
+{% block admin_content %}
+<h4>Dashboard</h4>
+
+<div class="row">
+  <div class="col-md-6">
+    <div class="card p-3 mb-3">
+      <h6>Students</h6>
+      <div class="display-6">{{ students_count }}</div>
+      <a class="btn btn-sm btn-outline-primary mt-2" href="{{ url_for('add_student') }}">Add Student</a>
+    </div>
+  </div>
+  <div class="col-md-6">
+    <div class="card p-3 mb-3">
+      <h6>Subjects</h6>
+      <div class="display-6">{{ subjects_count }}</div>
+      <a class="btn btn-sm btn-outline-primary mt-2" href="{{ url_for('add_subject') }}">Add Subject</a>
+    </div>
+  </div>
+</div>
+
+{% endblock %}

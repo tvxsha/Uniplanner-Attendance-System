@@ -1,0 +1,80 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="card p-3 mb-3">
+  <div class="d-flex align-items-center">
+    <div>
+      {% if student.photo %}
+        <img src="{{ url_for('uploaded_file', filename=student.photo) }}" class="profile-photo me-3">
+      {% else %}
+        <div class="profile-photo bg-light d-flex align-items-center justify-content-center me-3">No Photo</div>
+      {% endif %}
+    </div>
+    <div>
+      <h5>{{ student.name }}</h5>
+      <div class="text-muted">Reg No: {{ student.reg_no }}</div>
+      <a href="{{ url_for('student_logout') }}" class="btn btn-sm btn-outline-secondary mt-2">Logout</a>
+    </div>
+  </div>
+</div>
+
+<h5>Attendance</h5>
+<table class="table bg-white">
+  <thead><tr><th>Subject</th><th>Attended</th><th>Total</th><th>Attendence percentage</th></tr></thead>
+  <tbody>
+  {% for row in attendance %}
+  <tr>
+    <td>{{ row.subject }}</td>
+    <td>{{ row.attended }}</td>
+    <td>{{ row.total }}</td>
+    <td>{{ row.percent }}%</td>
+  </tr>
+  {% endfor %}
+</tbody>
+</table>
+<h5 class="mt-4">Class details</h5>
+<table class="table bg-white">
+  <thead>
+    <tr>
+      <th>Date</th>
+      <th>Time</th>
+      <th>Subject</th>
+      <th>Status</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for rec in recent_classes %}
+    <tr>
+      <td>{{ rec.date }}</td>
+      <td>
+        {% if rec.start_time and rec.end_time %}
+          {{ rec.start_time.strftime("%H:%M") }} - {{ rec.end_time.strftime("%H:%M") }}
+        {% elif rec.start_time %}
+          {{ rec.start_time.strftime("%H:%M") }}
+        {% else %}
+          -
+        {% endif %}
+      </td>
+      <td>{{ rec.subject_name }}</td>
+      <td>{{ "Present" if rec.present else "Absent" }}</td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+
+
+
+<h5 class="mt-4">Timetable</h5>
+{% if timetable %}
+  <table class="table bg-white">
+    <thead><tr><th>Day</th><th>Time</th><th>Subject</th></tr></thead>
+    <tbody>
+      {% for t in timetable %}
+        <tr><td>{{ t.day }}</td><td>{{ t.time }}</td><td>{{ t.subject_name }}</td></tr>
+      {% endfor %}
+    </tbody>
+  </table>
+{% else %}
+  <div class="text-muted">No timetable entries</div>
+{% endif %}
+
+{% endblock %}
